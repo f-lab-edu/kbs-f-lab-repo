@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>테스트 페이지</title>
+</head>
+<body>
+<h1>환영합니다.</h1>
+<tr th:each="board : ${Users}">
+    <td th:text="${board.name}"></td>
+    <td> 님 어서오세요 </td>
+    <td></td>
+</tr>
+</body>
+</html>
