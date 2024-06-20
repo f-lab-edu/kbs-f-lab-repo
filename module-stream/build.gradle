@@ -1,0 +1,43 @@
+plugins {
+    id 'org.springframework.boot' version '3.2.5'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'java'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+
+
+bootJar { enabled = false }
+jar { enabled = true }
+
+group = "org.example"
+version = "0.0.1-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //test 템플릿 추가 (나중에 삭제 할 지 안할지 결정)
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    //thymeleaf
+    implementation'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+    //implementation project(':module-core')
+}
+
+    tasks.test {
+    useJUnitPlatform()
+}
