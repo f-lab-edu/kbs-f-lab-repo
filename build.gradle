@@ -1,0 +1,81 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.5'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+allprojects {
+
+    group = 'org.example'
+    version = '0.0.1-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+    }
+
+}
+
+java {
+    sourceCompatibility = '17'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    //thymeleaf
+    implementation'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+    //module-common 모듈 전이 의존성 추가
+    implementation project(':module-core')
+}
+
+subprojects {
+    repositories {
+        mavenCentral()
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = 17
+
+    dependencies {
+
+    }
+}
+
+/*
+project(':module-api') {
+    dependencies {
+        api project(':module-core')
+    }
+}
+
+project('module-core') {
+    dependencies {
+        api project(':module-stream')
+    }
+}
+*/
+
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
